@@ -56,3 +56,14 @@ resource "aws_rds_cluster" "main" {
   kms_key_id              = var.kms_arn
   tags = merge(var.tags, { Name = "${var.name}-${var.env}-rds" })
 }
+
+# Create RDS Instance
+resource "aws_rds_cluster_instance" "cluster_instances" {
+  count              = var.instance_count
+  identifier         = "aurora-cluster-demo-${count.index}"
+  cluster_identifier = aws_rds_cluster.main.id
+  instance_class     = var.instance_class
+  engine             = aws_rds_cluster.main.engine
+  engine_version     = aws_rds_cluster.main.engine_version
+  tags = merge(var.tags, { Name = "${var.name}-${var.env}-rds-${count.index+1}" })
+}
