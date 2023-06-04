@@ -20,9 +20,7 @@ resource "aws_security_group" "main" {
     ipv6_cidr_blocks = ["::/0"]
   }
 
-  tags = {
-    Name = "${var.name}-${var.env}-sg"
-  }
+  tags = merge(var.tags, { Name = "${var.name}-${var.env}-sg" })
 }
 
 # Create RDS Subnet Grp
