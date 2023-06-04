@@ -5,7 +5,7 @@ resource "aws_security_group" "main" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description      = "DOCDB"
+    description      = "RDS"
     from_port        = 27017
     to_port          = 27017
     protocol         = "tcp"
@@ -23,4 +23,18 @@ resource "aws_security_group" "main" {
   tags = {
     Name = "${var.name}-${var.env}-sg"
   }
+}
+
+# Create RDS Subnet Grp
+resource "aws_db_subnet_group" "main" {
+  name       = "${var.name}-${var.env}-sg"
+  subnet_ids = var.subnets
+
+  tags = merge(var.tags, { Name = "${var.name}-${var.env}" })
+}
+
+# create parameter group
+resource "aws_db_parameter_group" "main" {
+  name   = "${var.name}-${var.env}-pg"
+  family = "mysql5.6"
 }
