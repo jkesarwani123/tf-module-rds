@@ -10,5 +10,6 @@ variable "engine_version" {}
 variable "kms_arn" {}
 variable "port_no" {
   default = 3306
+}
 }variable "instance_count" {}
 variable "instance_class" {}
