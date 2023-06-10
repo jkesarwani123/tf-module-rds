@@ -39,7 +39,7 @@ resource "aws_db_parameter_group" "main" {
 
 # Create RDS - My SQL Cluster
 resource "aws_rds_cluster" "main" {
-  cluster_identifier      = "${var.name}-${var.env}-rds"
+  cluster_identifier      = "${var.name}-${var.env}"
   engine                  = "aurora-mysql"
   engine_version          = var.engine_version
   database_name           = "dummy"
