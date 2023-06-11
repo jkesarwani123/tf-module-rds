@@ -28,7 +28,7 @@ resource "aws_db_subnet_group" "main" {
   name       = "${var.name}-${var.env}-sg"
   subnet_ids = var.subnets
 
-  tags = merge(var.tags, { Name = "${var.name}-${var.env}" })
+  tags = merge(var.tags, { Name = "${var.name}-${var.env}-sg" })
 }
 
 # create parameter group
@@ -39,7 +39,7 @@ resource "aws_db_parameter_group" "main" {
 
 # Create RDS - My SQL Cluster
 resource "aws_rds_cluster" "main" {
-  cluster_identifier      = "${var.name}-${var.env}"
+  cluster_identifier      = "${var.name}-${var.env}-rds"
   engine                  = "aurora-mysql"
   engine_version          = var.engine_version
   database_name           = "dummy"
